@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
 header {
   height: 100px;
   background-color: antiquewhite;
@@ -25,4 +26,20 @@ header {
 .title {
   font-size: 28px;
   font-weight: bold;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-form {
+  position: fixed;
+  background-color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }

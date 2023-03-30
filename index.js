@@ -38,12 +38,13 @@ function addBookToLibrary() {
   const inputCheckbox = document.createElement("input");
   inputCheckbox.type = "checkbox";
   inputCheckbox.id = "checkbox";
-  inputCheckbox.setAttribute("checked", false);
-  form.appendChild(inputCheckbox);
+  //inputCheckbox.setAttribute("checked", false);
+
   const labelCheckbox = document.createElement("label");
   labelCheckbox.for = "checkbox";
   labelCheckbox.textContent = "Have you read it?";
   form.appendChild(labelCheckbox);
+  labelCheckbox.appendChild(inputCheckbox);
 
   //create submitButton
   const submitButton = document.createElement("button");
@@ -55,10 +56,10 @@ function addBookToLibrary() {
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const pages = document.getElementById("page").value;
-    const isRead = inputCheckbox.checked ? "Read" : "Not read";
-    console.log(isRead);
+    const isRead = inputCheckbox.checked ? "Read" : "Unread";
     const newBook = new Book(title, author, pages, isRead);
     myLibrary.push(newBook);
+    modalForm.style.display = "none";
     displayBooks();
   });
 }
@@ -85,11 +86,12 @@ function displayBooks() {
     readStatus.textContent = book.isRead;
     //create togglereadStatus button
     const toggleButton = document.createElement("button");
-    toggleButton.textContent="Change read status"
-    toggleButton.addEventListener("click",function(){
+    toggleButton.type = "button";
+    toggleButton.textContent = "Change read status";
+    toggleButton.addEventListener("click", function () {
       book.toggleReadStatus();
-      readStatus.textContent=book.isread
-    })
+      readStatus.textContent = book.isRead ? "Read" : "Unread";
+    });
 
     //create Remove button
     const removeButton = document.createElement("button");
@@ -104,9 +106,8 @@ function displayBooks() {
     bookCard.appendChild(displayAuthor);
     bookCard.appendChild(displayPage);
     bookCard.appendChild(readStatus);
-    bookCard.appendChild(removeButton);
+    bookCard.appendChild(toggleButton);
     bookCard.appendChild(removeButton);
     booksInfo.appendChild(bookCard);
-    booksInfo.appendChild(toggleButton)
   });
 }
