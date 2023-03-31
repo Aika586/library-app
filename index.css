@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
 }
 
 header {
@@ -28,18 +30,102 @@ header {
   font-weight: bold;
 }
 
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#modal-form {
+form {
+  width: 300px;
   position: fixed;
-  background-color: white;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 form {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: rgba(240, 232, 232, 0.986);
+}
+
+label {
+  font-size: 20px;
+}
+
+input[type="text"],
+input[type="number"] {
+  font-size: 1.4em;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+  padding-left: 10px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 5px #007bff;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0px 0px 0px 8px;
+  width: 1.2em;
+  height: 1.2em;
+  border: 1px solid rgb(241, 236, 236);
+}
+input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border: 3px solid white;
+}
+
+button[type="submit"] {
+  background-color: green;
+  color: white;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.book-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.book-card {
+  width: 300px;
+  margin-left: 50px;
+  background-color: black;
+  color: #fff;
+  padding: 30px;
+  border: none;
+  border-radius: 5px;
+}
+
+button[type="button"] {
+  width: 200px;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+}
+
+#togglebutton {
+  background-color: green;
+}
+#removebutton {
+  background-color: red;
 }

@@ -1,6 +1,5 @@
-const modalForm = document.getElementById("modal-form");
 const addBook = document.getElementById("addBook");
-
+const form = document.getElementById("myForm");
 let myLibrary = [];
 
 function Book(title, author, page, isRead) {
@@ -16,55 +15,28 @@ Book.prototype.toggleReadStatus = function () {
 
 function addBookToLibrary() {
   //Create form element
-  const form = document.createElement("form");
-  form.id = "myForm";
-  modalForm.appendChild(form);
-  //create labels
-  const labels = ["Title", "Author", "Page"];
-  labels.forEach((labelText) => {
-    const label = document.createElement("label");
-    label.textContent = labelText + ":";
-    label.setAttribute("for", labelText.toLowerCase());
-    form.appendChild(label);
-    //create input
-    const input = document.createElement("input");
-    input.type = labelText === "Page" ? "number" : "text";
-    input.id = labelText.toLowerCase();
-    form.appendChild(input);
-    form.appendChild(document.createElement("br"));
-  });
-  //create checkbox with label
-
-  const inputCheckbox = document.createElement("input");
-  inputCheckbox.type = "checkbox";
-  inputCheckbox.id = "checkbox";
-  //inputCheckbox.setAttribute("checked", false);
-
-  const labelCheckbox = document.createElement("label");
-  labelCheckbox.for = "checkbox";
-  labelCheckbox.textContent = "Have you read it?";
-  form.appendChild(labelCheckbox);
-  labelCheckbox.appendChild(inputCheckbox);
-
-  //create submitButton
-  const submitButton = document.createElement("button");
-  submitButton.textContent = "Submit";
-  form.appendChild(submitButton);
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
-    const pages = document.getElementById("page").value;
-    const isRead = inputCheckbox.checked ? "Read" : "Unread";
-    const newBook = new Book(title, author, pages, isRead);
-    myLibrary.push(newBook);
-    modalForm.style.display = "none";
-    displayBooks();
-  });
+  if (form.style.display === "none") {
+    form.style.display = "flex";
+  } else {
+    form.style.display = "none";
+  }
 }
 
 addBook.addEventListener("click", addBookToLibrary);
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = document.getElementById("page").value;
+  const checkbox = document.getElementById("checkbox");
+  const isRead = checkbox.checked ? "Read" : "Unread";
+  const newBook = new Book(title, author, pages, isRead);
+  myLibrary.push(newBook);
+  displayBooks();
+  form.style.display = "none";
+  form.reset();
+});
 
 function displayBooks() {
   const booksInfo = document.getElementById("book-info");
@@ -87,6 +59,7 @@ function displayBooks() {
     //create togglereadStatus button
     const toggleButton = document.createElement("button");
     toggleButton.type = "button";
+    toggleButton.id = "togglebutton";
     toggleButton.textContent = "Change read status";
     toggleButton.addEventListener("click", function () {
       book.toggleReadStatus();
@@ -95,6 +68,8 @@ function displayBooks() {
 
     //create Remove button
     const removeButton = document.createElement("button");
+    removeButton.id = "removebutton";
+    removeButton.type = "button";
     removeButton.textContent = "Remove";
     removeButton.setAttribute("data-index", index);
     removeButton.addEventListener("click", (event) => {
